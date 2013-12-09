@@ -68,7 +68,13 @@
   label.text = [NSString stringWithFormat:@"課程標題:%d", indexPath.row];
   
   UIImageView *uiimageview = (UIImageView *)[cell viewWithTag:CELL_IMAGE_TAG];
-  [uiimageview setImage:[UIImage imageNamed:@"preview.png"]];
+  // local image
+  //[uiimageview setImage:[UIImage imageNamed:@"preview.png"]];
+  
+  // remote image
+  // @"http://www.nissan.com.tw/tc/cars/march/campaign/images/fb/1.jpg"
+  [uiimageview setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.nissan.com.tw/tc/cars/march/campaign/images/fb/%d.jpg", 1+indexPath.row%36]] placeholderImage:[UIImage imageNamed:@"previewholder"]];
+  
   
   return cell;
 }

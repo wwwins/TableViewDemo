@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #define CELL_LABEL_TAG   101
 #define CELL_BUTTON_TAG  102
