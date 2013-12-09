@@ -61,19 +61,20 @@
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
   }
   
-  cell.textLabel.text = [[_arrDataSource objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+  //cell.textLabel.text = [[_arrDataSource objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
   //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   
   UILabel *label = (UILabel *)[cell viewWithTag:CELL_LABEL_TAG];
-  label.text = [NSString stringWithFormat:@"課程標題:%d", indexPath.row];
+  //label.text = [NSString stringWithFormat:@"課程標題:%d", indexPath.row];
+  label.text = [[_arrDataSource objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
   
   UIImageView *uiimageview = (UIImageView *)[cell viewWithTag:CELL_IMAGE_TAG];
   // local image
   //[uiimageview setImage:[UIImage imageNamed:@"preview.png"]];
   
   // remote image
-  // @"http://www.nissan.com.tw/tc/cars/march/campaign/images/fb/1.jpg"
-  [uiimageview setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.nissan.com.tw/tc/cars/march/campaign/images/fb/%d.jpg", 1+indexPath.row%36]] placeholderImage:[UIImage imageNamed:@"previewholder"]];
+  // @"http://lorempixel.com/400/200/cats/[1-9]"
+  [uiimageview setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://lorempixel.com/400/200/cats/%d", 1+indexPath.row%9]] placeholderImage:[UIImage imageNamed:@"previewholder"]];
   
   
   return cell;
