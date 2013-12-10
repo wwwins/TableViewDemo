@@ -75,7 +75,9 @@
   // remote image
   // @"http://lorempixel.com/400/200/cats/[1-9]"
   [uiimageview setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://lorempixel.com/400/200/cats/%d", 1+indexPath.row%9]] placeholderImage:[UIImage imageNamed:@"previewholder"]];
-  
+
+  UIButton *btn = (UIButton *)[cell viewWithTag:CELL_BUTTON_TAG];
+  [btn addTarget:self action:@selector(handleClick:) forControlEvents:UIControlEventTouchUpInside];
   
   return cell;
 }
@@ -107,6 +109,33 @@
       break;
   }
    */
+}
+
+- (void)handleClick:(id) sender
+{
+  // using superview
+  /*
+  UITableViewCell *clickedCell = (UITableViewCell *)[[[sender superview] superview] superview];
+  NSIndexPath *indexPath = [self.tableView indexPathForCell:clickedCell];
+  */
+  // using position
+  CGPoint btnPosition = [sender convertPoint:CGPointZero toView:self.tableView];
+  NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:btnPosition];
+  NSLog(@"indexPath:%d", indexPath.row);
+  
+  [self cleanAllImage];
+}
+
+- (void)cleanAllImage
+{
+  SDImageCache *imageCache = [SDImageCache sharedImageCache];
+  [imageCache clearMemory];
+  [imageCache clearDisk];
+  [imageCache cleanDisk];
+  
+  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Info" message:@"Clean all memory and disk cache" delegate:self cancelButtonTitle:nil otherButtonTitles:@"確定", nil];
+  [alertView show];
+  
 }
 
 - (void)didReceiveMemoryWarning
