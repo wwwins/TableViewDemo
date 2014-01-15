@@ -61,7 +61,7 @@
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
   }
   
-  //cell.textLabel.text = [[_arrDataSource objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+  cell.textLabel.text = [[_arrDataSource objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
   //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   
   UILabel *label = (UILabel *)[cell viewWithTag:CELL_LABEL_TAG];
@@ -121,7 +121,9 @@
   // using position
   CGPoint btnPosition = [sender convertPoint:CGPointZero toView:self.tableView];
   NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:btnPosition];
-  NSLog(@"indexPath:%d", indexPath.row);
+  UITableViewCell *clickedCell = (UITableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+  
+  NSLog(@"indexPath:%d, textLabel:%@", indexPath.row, clickedCell.textLabel.text);
   
   [self cleanAllImage];
 }
