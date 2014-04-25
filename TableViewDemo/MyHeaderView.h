@@ -11,10 +11,14 @@
 @interface MyHeaderView : UIView<UIScrollViewDelegate>
 
 @property NSMutableArray *arrImages;
+@property NSTimer *timer;
 
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UILabel *label;
 
 - (void)initAll;
+- (void)startPaging;
+- (void)stopPaging;
+
 @end

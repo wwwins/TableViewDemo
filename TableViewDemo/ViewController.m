@@ -19,6 +19,8 @@
 @property NSMutableArray *arrDataSource1;
 @property NSMutableArray *arrDataSource2;
 
+@property MyHeaderView *myHeaderView;
+
 @end
 
 @implementation ViewController
@@ -45,8 +47,9 @@
   self.tableView.dataSource = self;
 
 #ifdef HEADER_IN_VIEW
-  MyHeaderView *myHeaderView = [[[NSBundle mainBundle] loadNibNamed:@"MyHeaderView" owner:self options:nil] lastObject];
-  self.tableView.tableHeaderView = myHeaderView;
+  //MyHeaderView *myHeaderView = [[[NSBundle mainBundle] loadNibNamed:@"MyHeaderView" owner:self options:nil] lastObject];
+  self.myHeaderView = [[[NSBundle mainBundle] loadNibNamed:@"MyHeaderView" owner:self options:nil] lastObject];
+  self.tableView.tableHeaderView = self.myHeaderView;
 #endif
 }
 
@@ -117,7 +120,9 @@
 }
 
 #pragma mark - header in section
+
 #ifdef HEADER_IN_SECTION
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
   return 128;
@@ -129,7 +134,31 @@
   return myHeaderView;
 
 }
+
 #endif
+
+#pragma mark - header in view
+
+#ifdef HEADER_IN_VIEW
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  //  NSLog(@"Will:%d,%d",indexPath.section,indexPath.row);
+  if(indexPath.section==0 && indexPath.row==0)
+    [self.myHeaderView startPaging];
+
+}
+
+#endif
+
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  //  NSLog(@"End:%d,%d",indexPath.section,indexPath.row);
+  if(indexPath.section==0 && indexPath.row==0)
+    [self.myHeaderView stopPaging];
+  
+}
+
 
 #pragma mark - action
 

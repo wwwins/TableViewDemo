@@ -63,6 +63,7 @@
 {
   [self initImages];
   //[self initSubViews];
+  //[self startPaging];
 }
 
 - (void)initSubViews
@@ -108,6 +109,31 @@
 {
   _pageControl.currentPage = _scrollView.contentOffset.x / IMAGE_W;
 
+}
+
+#pragma mark - auto-paging
+- (void)startPaging
+{
+  [self stopPaging];
+  self.timer = [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(handleTimer) userInfo:nil repeats:YES];
+}
+
+-(void)stopPaging
+{
+  [self.timer invalidate];
+  self.timer = nil;
+}
+
+#pragma mark -
+- (void)handleTimer
+{
+  NSLog(@"handleTimer");
+  CGPoint pt = _scrollView.contentOffset;
+  pt.x += IMAGE_W;
+  if ((pt.x>IMAGE_W*([_arrImages count]-1))) {
+    pt.x = 0;
+  }
+  [_scrollView setContentOffset:pt animated:YES];
 }
 
 @end
