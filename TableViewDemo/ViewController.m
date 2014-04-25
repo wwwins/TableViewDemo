@@ -27,14 +27,14 @@
 {
   [super viewDidLoad];
   // Do any additional setup after loading the view, typically from a nib.
-  
+
   _arrDataSource1 = [[NSMutableArray alloc] init];
-  for (int i=0; i<30; i++) {
+  for (int i=0; i<3; i++) {
     [_arrDataSource1 addObject:[NSString stringWithFormat:@"第 %d 筆", i]];
   }
   
   _arrDataSource2 = [[NSMutableArray alloc] init];
-  for (int i=0; i<50; i++) {
+  for (int i=0; i<5; i++) {
     [_arrDataSource2 addObject:[NSString stringWithFormat:@"No:%d", i]];
   }
   
@@ -43,6 +43,11 @@
   
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
+
+#ifdef HEADER_IN_VIEW
+  MyHeaderView *myHeaderView = [[[NSBundle mainBundle] loadNibNamed:@"MyHeaderView" owner:self options:nil] lastObject];
+  self.tableView.tableHeaderView = myHeaderView;
+#endif
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -110,6 +115,23 @@
   }
    */
 }
+
+#pragma mark - header in section
+#ifdef HEADER_IN_SECTION
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+  return 128;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+  MyHeaderView *myHeaderView = [[[NSBundle mainBundle] loadNibNamed:@"MyHeaderView" owner:self options:nil] lastObject];
+  return myHeaderView;
+
+}
+#endif
+
+#pragma mark - action
 
 - (void)handleClick:(id) sender
 {
