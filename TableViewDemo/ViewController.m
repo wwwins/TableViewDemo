@@ -41,7 +41,7 @@
   }
   
   _arrDataSource = [[NSMutableArray alloc] initWithObjects:_arrDataSource1, _arrDataSource2, nil];
-  _arrSectionData = [[NSArray alloc] initWithObjects:@"category-1",@"category-2", nil ];
+  _arrSectionData = [[NSArray alloc] initWithObjects:@"category-1:center",@"category-2", nil ];
   
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
@@ -123,6 +123,24 @@
 
 #ifdef HEADER_IN_SECTION
 
+#ifdef HEADER_IN_SECTION_TITLE_ALIGN_CENTER
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+  return 30;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+  UILabel *title =[[UILabel alloc] init];
+  title.textAlignment = NSTextAlignmentCenter;
+  title.backgroundColor = [UIColor colorWithRed:0.600 green:0.800 blue:1.000 alpha:1.000];
+  title.font = [UIFont boldSystemFontOfSize:18];
+  title.text = _arrSectionData[section];
+  return title;
+
+}
+
+#else
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
   return 128;
@@ -134,6 +152,7 @@
   return myHeaderView;
 
 }
+#endif
 
 #endif
 

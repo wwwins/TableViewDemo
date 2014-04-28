@@ -1,6 +1,6 @@
 TableViewDemo
 =============
 
-iOS UITableView + UIScrollView in head.
+iOS: Align the section title to center in UITableView.
 
-![Demo](https://raw.githubusercontent.com/wwwins/TableViewDemo/TableViewWithScrollViewInHead/screenshots/Demo.png)
+![Center](https://raw.githubusercontent.com/wwwins/TableViewDemo/TableViewWithScrollViewInHead/screenshots/Center.png)

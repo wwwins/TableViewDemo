@@ -16,7 +16,8 @@
 #define CELL_IMAGE_TAG   103
 
 #define HEADER_IN_VIEW
-//#define HEADER_IN_SECTION
+#define HEADER_IN_SECTION
+#define HEADER_IN_SECTION_TITLE_ALIGN_CENTER
 
 @interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
